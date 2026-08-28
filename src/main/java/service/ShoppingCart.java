@@ -7,37 +7,31 @@ public class ShoppingCart {
     public ShoppingCart(Food[] items) {
         this.items = items;
     }
-    public double getTotalSumWithoutDiscount() {
-        double total = 0.0;
-        for (Food item : items) {
-            double itemPrice = item.getAmount() * item.getPrice();
-            total += itemPrice;
-        }
-        return total;
-    }
-    public double getTotalSumWithDiscount() {
-        double total = 0.0;
 
+    public double getTotalPriceWithoutDiscount() {
+        double totalPrice = 0;
         for (Food item : items) {
-            double fullPrice = item.getAmount() * item.getPrice();
-            double discountPercent = getDiscount();
-            double finalPrice = fullPrice * (1.0 - discountPercent / 100.0);
-            total += finalPrice;
+            totalPrice += item.getAmount() * item.getPrice();
         }
-        return total;
+        return totalPrice;
     }
-    private double getDiscount() {
-        return 0;
-    }
-    public double getTotalVegetarianSum() {
-        double total = 0.0;
+
+    public double getTotalPriceWithDiscount() {
+        double totalPrice = 0;
         for (Food item : items) {
-            // Проверяем, является ли продукт вегетарианским
+            double itemCost = item.getAmount() * item.getPrice();
+            double discountAmount = itemCost * item.getDiscount();
+            totalPrice += itemCost - discountAmount;
+        }
+        return totalPrice;
+    }
+    public double getTotalVegetarianPriceWithoutDiscount() {
+        double vegetarianTotalPrice = 0;
+        for (Food item : items) {
             if (item.isVegetarian()) {
-                double itemPrice = item.getAmount() * item.getPrice();
-                total += itemPrice;
+                vegetarianTotalPrice += item.getAmount() * item.getPrice();
             }
         }
-        return total;
+        return vegetarianTotalPrice;
     }
 }

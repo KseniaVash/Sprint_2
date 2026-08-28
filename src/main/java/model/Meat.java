@@ -1,13 +1,11 @@
 package model;
 
-public class Meat extends Food implements Discountable {
+public class Meat extends Food { // Теперь Meat наследуется от Food
 
     public Meat(int amount, double price) {
-        super(amount, price, false);
-    }
-
-    @Override
-    public double getDiscount() {
-        return 0.0;
+        this.amount = amount;
+        this.price = price;
+        this.isVegetarian = false; // Мясо не вегетарианское
     }
 }
+
